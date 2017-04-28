@@ -11,6 +11,23 @@ namespace NUnit.Tests1
     public class BankAccountTestClass
     {
         //NUnit Tests against Bank Account
+
+        public static int initialAmount = 3000;
+        public static int withdrawSum1 = 700;
+        public static int withdrawSum2 = 1200;
+
+        public static int expectedAmount;
+
+        public static BankAcount account = null;
+
+        [SetUp]
+        public void BankAccountInitializer()
+        {
+            account = new BankAcount(initialAmount);
+            expectedAmount =  initialAmount - (int)(withdrawSum1 * 1.05);
+        }
+
+
         [Test]
         public void BankAccountNegativeTest()
         {
@@ -22,40 +39,49 @@ namespace NUnit.Tests1
         [Test]
         public void WithdrawTest()
         {
-            int initialAmount = 3000;
-            int withdrawSum1 = 700;
-            int withdrawSum2 = 1200;
-
-            int expectedAmount = initialAmount - (int)(withdrawSum1 * 1.05);
-            BankAcount account = new BankAcount(initialAmount);
             account.Withdraw(withdrawSum1);
             Assert.AreEqual(expectedAmount, account.Amount);
 
             account.Withdraw(withdrawSum2);
             expectedAmount = expectedAmount - (int)(withdrawSum2 * 1.02);
             Assert.AreEqual(expectedAmount, account.Amount);
-
-            Assert.IsNotNull(expectedAmount);
-            Assert.GreaterOrEqual(initialAmount, expectedAmount);
-            Assert.True(withdrawSum1 < initialAmount);
-            Assert.AreNotEqual(withdrawSum1, withdrawSum2);
-            Assert.LessOrEqual(withdrawSum1, initialAmount);
-
         }
 
         [Test]
-        public void BankAccountAssertingTest()
+        public void IsNotNullAssert()
         {
-            /*
-              Write five more tests against BankAccount that test its functionality.Use five different
-                type of asserts for these tests.
-            */
-            // TODO Create Implementation
-            throw new NotImplementedException();
+            Assert.IsNotNull(account);
         }
 
+        [Test]
+        public void GreaterOrEqual()
+        {
+            Assert.GreaterOrEqual(initialAmount, expectedAmount);
+        }
 
+        [Test]
+        public void Equals()
+        {
+            BankAcount otherAccount = new BankAcount(initialAmount);
+            Assert.AreNotSame(account, otherAccount);
+        }
 
-    
+        [Test]
+        public void Less()
+        {
+            Assert.Less(withdrawSum1, initialAmount);
+        }
+
+        [Test]
+        public void AreNotEqual()
+        {
+            Assert.AreNotEqual(withdrawSum1, withdrawSum2);
+        }
+
+        [Test]
+        public void LessOrEqual()
+        {
+            Assert.LessOrEqual(withdrawSum1, initialAmount);
+        }
     }
 }
