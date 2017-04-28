@@ -34,6 +34,13 @@ namespace NUnit.Tests1
             account.Withdraw(withdrawSum2);
             expectedAmount = expectedAmount - (int)(withdrawSum2 * 1.02);
             Assert.AreEqual(expectedAmount, account.Amount);
+
+            Assert.IsNotNull(expectedAmount);
+            Assert.GreaterOrEqual(initialAmount, expectedAmount);
+            Assert.True(withdrawSum1 < initialAmount);
+            Assert.AreNotEqual(withdrawSum1, withdrawSum2);
+            Assert.LessOrEqual(withdrawSum1, initialAmount);
+
         }
 
         [Test]
@@ -44,7 +51,7 @@ namespace NUnit.Tests1
                 type of asserts for these tests.
             */
             // TODO Create Implementation
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
 
