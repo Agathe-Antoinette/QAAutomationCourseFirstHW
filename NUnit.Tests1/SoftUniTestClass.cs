@@ -16,7 +16,7 @@ namespace NUnit.Tests1
         [Test]
         public void FindQAAutomationCourse()
         {
-            using (IWebDriver driver = new FirefoxDriver())
+            using (IWebDriver driver = new FirefoxDriver()) 
             {
                 driver.Navigate().GoToUrl("https://softuni.bg");
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
